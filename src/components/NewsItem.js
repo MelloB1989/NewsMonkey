@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 
 export class NewsItem extends Component {
   render() {
-    let {title, description} = this.props;
+    let {title, description, img, newsLink} = this.props;
     return (
 <>
-<div className="card" style={this.props.mode === 'light' ? {color: 'black', backgroundColor: 'white', width: "18rem"} : {color: 'white', backgroundColor: '#212529', border: '1px white', width: "18rem"}}>
-  <img src="..." className="card-img-top" alt="..."/>
+<div className="card my-3 shadow" style={this.props.mode === 'light' ? {color: 'black', backgroundColor: 'white', width: "18rem"} : {color: 'white', backgroundColor: '#212529', border: '1px white', width: "18rem"}}>
+  <img src={img} className="card-img-top" alt="..." height="180px" width="580px"/>
     <div className="card-body">
-        <h5 className="card-title">{title}</h5>
-        <p className="card-text">{description}</p>
-        <a href="/newsitem" className="btn btn-primary">Read more</a>
+        <h5 className="card-title">{title}...</h5>
+        <p className="card-text">{description}...</p>
+        <a href={newsLink} target="_blank" rel="noreferrer" className="btn btn-sm btn-primary">Read more</a>
     </div>
 </div>
 </>
