@@ -16,7 +16,14 @@ export class News extends Component {
       }
     
       componentDidMount() {
-        fetch("https://newsapi.org/v2/top-headlines?country=in&apiKey=02371a18470c45d3803d7128227949d4")
+        this.setState({
+          isLoaded: false,
+          totalResults: 0,
+          articles: []
+        });
+        let news = document.getElementById("news");
+        news === null ? console.log("ok") : news.style.display = "none";
+        fetch(`https://newsapi.org/v2/top-headlines?country=${this.props.category}&apiKey=02371a18470c45d3803d7128227949d4`)
           .then(res => res.json())
           .then(
             (result) => {
@@ -25,6 +32,7 @@ export class News extends Component {
                 articles: result.articles,
                 totalResults: result.totalResults
               });
+              console.log(result);
             },
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow
@@ -47,8 +55,8 @@ export class News extends Component {
         return <div className="container my-8"><img alt="Loading GIF" height="80px" width="150px"src={this.props.mode === 'light' ? 'https://miro.medium.com/max/1400/1*CsJ05WEGfunYMLGfsT2sXA.gif' : 'https://i.pinimg.com/originals/42/a8/d4/42a8d4625aeb088c45eba5a84ca36325.gif'}/></div>;
     } else {
         return (
-            <div className="container my-3" style={this.props.mode === 'light' ? {color: 'black', backgroundColor: 'white'} : {color: 'white', backgroundColor: '#212529', border: '1px white'}}>
-            <h2><strong>NewsMonkey</strong> - Top Headlines</h2>
+            <div className="container my-3" id="news" style={this.props.mode === 'light' ? {color: 'black', backgroundColor: 'white'} : {color: 'white', backgroundColor: '#212529', border: '1px white'}}>
+            <h2><strong>NewsMonkey</strong>{this.props.title}</h2>
             <h5><strong>{totalResults}</strong> news articles.</h5>
             <div className="row">
             {articles.map((article) => {
